@@ -1,0 +1,28 @@
+{
+    "name": "mario.junior2/tarefes",
+    "type": "project",
+    "require": {
+        "slim/slim": "^4.14",
+        "psr/http-client": "^1.0",
+        "slim/psr7": "^1.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "MarioJunior2\\Tarefes\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mario.junior2",
+            "email": "mario.junior2@alunos.sc.senac.br"
+        }
+    ],
+    "require-dev": {
+        "pestphp/pest": "^2.36"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
