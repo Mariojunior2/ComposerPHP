@@ -42,7 +42,8 @@ $app->get('/tarefas', function (Request $request, Response $response, array $arg
 });
 
 $app->post('/tarefas', function(Request $request, Response $response, array $args) {
-    if(!array_key_exists('titulo', $args) || empty($args['titulo'])) {
+    $paremetros = (array) $request->getParsedBody();
+    if(!array_key_exists('titulo', $paremetros) || empty($paremetros['titulo'])) {
         $response->getBody()->write(json_encode([
             "mensagem" => "titulo obrigatorio"
         ]));
