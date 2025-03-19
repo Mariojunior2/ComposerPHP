@@ -24,7 +24,7 @@ $errorMiddleware->setErrorHandler(HttpNotFoundException::class, function (
 });
 
 $app->get('/ola/{name}', function (Request $request, Response $response, array $args) {
-    $name = $args['name'];
+    $name = $args['name']; 
     $response->getBody()->write("Hello, $name");
     return $response;
 });
@@ -48,8 +48,8 @@ $app->post('/tarefas', function(Request $request, Response $response, array $arg
             "mensagem" => "titulo obrigatorio"
         ]));
         return $response->withHeader('Content-Type', 'application/json')->withStatus(400);
-    }
-    return $response->withStatus(204);
+    } 
+    return $response->withStatus(201);
 });
 
 $app->delete('/tarefas', function(Request $request, Response $response, array $args) {
