@@ -43,7 +43,8 @@ $app->get('/tarefas', function (Request $request, Response $response, array $arg
 
 $app->post('/tarefas', function(Request $request, Response $response, array $args) {
     $paremetros = (array) $request->getParsedBody();
-    if(!array_key_exists('titulo', $paremetros) || empty($paremetros['titulo'])) {
+    
+    if(!array_key_exists('titulo', $paremetros) && empty($paremetros['titulo'])) {
         $response->getBody()->write(json_encode([
             "mensagem" => "titulo obrigatorio"
         ]));
@@ -52,12 +53,21 @@ $app->post('/tarefas', function(Request $request, Response $response, array $arg
     return $response->withStatus(201);
 });
 
-$app->delete('/tarefas', function(Request $request, Response $response, array $args) {
+$app->delete('/tarefas/{id}', function(Request $request, Response $response, array $args) {
+    $id = $args['id'];
     return $response->withStatus(204);
 });
 
-$app->put('/tarefas', function(Request $request, Response $response, array $args) {
-    return $response->withStatus(204);
+$app->put('/tarefas/{id}', function(Request $request, Response $response, array $args) {
+    $id = $args['id'];
+    $dados_para_atualizar = (array) $request->getParsedBody();
+    if(array_key_exists('titulo', $dados_para_atualizar) && empty($dados_para_atualizar['titulo'])) {
+        $response->getBody()->write(json_encode([
+            "mensagem" => "titulo obrigatorio"
+        ]));
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(400);
+    } 
+    return $response->withStatus(201);
 });
 
 $app->run();
