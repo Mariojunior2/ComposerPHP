@@ -1,16 +1,15 @@
 <?php 
-namespace MarioJunior2\Tarefes\tarefas\Service;
-
+namespace MarioJunior2\Tarefes\Service;
 
 class TarefaService
 {
-    private $filePath = __DIR__ . '/../data.json';
+    private $filePath = __DIR__ . '../../data.json';
 
     private function readData()
     {
         if (!file_exists($this->filePath)) {
             file_put_contents($this->filePath, json_encode([]));
-        }
+        } 
         $json = file_get_contents($this->filePath);
         return json_decode($json, true);
     }
@@ -20,7 +19,7 @@ class TarefaService
         file_put_contents($this->filePath, json_encode($data, JSON_PRETTY_PRINT));
     }
 
-    private function createTarefa($tarefa)
+    public function createTarefa($tarefa)
     {
         $data = $this->readData();
         $tarefa['id'] = uniqid();
@@ -43,6 +42,7 @@ class TarefaService
         }
         return null;
     }
+
     public function updateTarefa($id, $updatedTarefa) {
         $data = $this->readData();
         foreach ($data as &$tarefa) {
@@ -53,6 +53,14 @@ class TarefaService
             }
         }
         return false;
+    }
+
+    public function deleteTarefa($id)
+    {
+        $data = $this->readData();
+        $filteredData = array_filter($data, fn($tarefa) => $tarefa['id'] != $id);
+        $this->writeData(array_values($filteredData));
+        return count($data) != count($filteredData);
     }
 }
 ?>

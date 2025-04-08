@@ -1,10 +1,10 @@
 <?php
-
 use PhpParser\Node\Stmt\While_;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Factory\AppFactory;
+use MarioJunior2\Tarefes\Service\TarefaService;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -23,33 +23,33 @@ $errorMiddleware->setErrorHandler(HttpNotFoundException::class, function (
     return $response->withHeader('Content-Type', 'application/json')->withStatus(404);
 });
 
-$app->get('/ola/{name}', function (Request $request, Response $response, array $args) {
-    $name = $args['name']; 
-    $response->getBody()->write("Hello, $name");
-    return $response;
-});
+//            $app->get('/ola/{name}', function (Request $request, Response $response, array $args) {
+//                $name = $args['name']; 
+//                $response->getBody()->write("Hello, $name");
+//                return $response;
+//            });
 
 $app->get('/tarefas', function (Request $request, Response $response, array $args) {
-    $tarefa = [
-        ["id" => 1, "titulo" => "Veja que legal1", "concluido1" => false],
-        ["id" => 2, "titulo" => "Veja que legal2", "concluido2" => false],
-        ["id" => 3, "titulo" => "Veja que legal3", "concluido3" => false],
-        ["id" => 4, "titulo" => "Veja que legal4", "concluido4" => true],
-        ["id" => 5, "titulo" => "Veja que legal5", "concluido5" => false],
-    ];
+    $tarefa_service = new TarefaService();
+    $tarefa = $tarefa_service->getAllTarefas();
     $response->getBody()->write(json_encode($tarefa));
     return $response->withHeader('Content-Type', 'application/json');
 });
 
 $app->post('/tarefas', function(Request $request, Response $response, array $args) {
     $paremetros = (array) $request->getParsedBody();
-    
+
+
     if(!array_key_exists('titulo', $paremetros) && empty($paremetros['titulo'])) {
         $response->getBody()->write(json_encode([
             "mensagem" => "titulo obrigatorio"
         ]));
         return $response->withHeader('Content-Type', 'application/json')->withStatus(400);
     } 
+
+    $modelo = array(['tarefa' => '', 'concluindo' => false], $paremetros);
+    $tarefa_service = new TarefaService();
+    $tarefa_service->createTarefa($paremetros);
     return $response->withStatus(201);
 });
 
