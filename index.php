@@ -66,7 +66,7 @@ $app->put('/tarefas/{id}', function(Request $request, Response $response, array 
     $id = $args['id'];
     $dados_para_atualizar = (array) $request->getParsedBody();
     
-    if(!array_key_exists('titulo', $dados_para_atualizar) && empty($dados_para_atualizar['titulo'])) {
+    if(!array_key_exists('titulo', $dados_para_atualizar) or empty($dados_para_atualizar['titulo'])) {
         $response->getBody()->write(json_encode([
             "mensagem" => "titulo obrigatorio"
         ]));
