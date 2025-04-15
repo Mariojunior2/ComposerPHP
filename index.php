@@ -59,14 +59,16 @@ $app->delete('/tarefas/{id}', function(Request $request, Response $response, arr
     $id = $args['id'];
     $tarefa_service = new TarefaService();
     $tarefa_service->deleteTarefa($id);
-    return $response->withStatus(204);
+    $response->getBody()->write('{"Deletado": "Com sucesso!"}');
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(204);
 });
 
 $app->put('/tarefas/{id}', function(Request $request, Response $response, array $args) {
     $id = $args['id'];
-    $dados_para_atualizar = (array) $request->getParsedBody();
+    $dados_para_atualizar = json_decode($request->getBody()->getContents(), true);
+
     
-    if(!array_key_exists('titulo', $dados_para_atualizar) or empty($dados_para_atualizar['titulo'])) {
+    if(array_key_exists('titulo', $dados_para_atualizar) && empty($dados_para_atualizar['titulo'])) {
         $response->getBody()->write(json_encode([
             "mensagem" => "titulo obrigatorio"
         ]));
