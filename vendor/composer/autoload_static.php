@@ -61,6 +61,7 @@ class ComposerStaticInitee8a085a8799d5078c25f4bf32024a76
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
             'Psr\\Container\\' => 14,
+            'Projetux\\' => 9,
             'PhpParser\\' => 10,
             'Pest\\Plugin\\' => 12,
             'Pest\\Arch\\' => 10,
@@ -72,10 +73,6 @@ class ComposerStaticInitee8a085a8799d5078c25f4bf32024a76
         'N' => 
         array (
             'NunoMaduro\\Collision\\' => 21,
-        ),
-        'M' => 
-        array (
-            'MarioJunior2\\Tarefes\\' => 21,
         ),
         'J' => 
         array (
@@ -183,6 +180,10 @@ class ComposerStaticInitee8a085a8799d5078c25f4bf32024a76
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
+        'Projetux\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
@@ -214,10 +215,6 @@ class ComposerStaticInitee8a085a8799d5078c25f4bf32024a76
         'NunoMaduro\\Collision\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/collision/src',
-        ),
-        'MarioJunior2\\Tarefes\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
         ),
         'Jean85\\' => 
         array (

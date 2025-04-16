@@ -8,7 +8,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MarioJunior2\\Tarefes\\": "src/"
+            "Projetux\\": "src/"
         }
     },
     "authors": [

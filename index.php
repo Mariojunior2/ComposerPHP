@@ -4,7 +4,8 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Factory\AppFactory;
-use MarioJunior2\Tarefes\Service\TarefaService;
+use Projetux\Service\TarefaService;
+use Projetux\infra\Debug;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -34,6 +35,12 @@ $app->get('/tarefas', function (Request $request, Response $response, array $arg
     $tarefa = $tarefa_service->getAllTarefas();
     $response->getBody()->write(json_encode($tarefa));
     return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/teste-debug', function(Request $request, Response $response, array $args) {
+    $debug = new Debug();
+    $response->getBody()->write($debug->debug('teste 00001'));
+    return $response;
 });
 
 $app->post('/tarefas', function(Request $request, Response $response, array $args) {
