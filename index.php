@@ -6,6 +6,7 @@ use Slim\Exception\HttpNotFoundException;
 use Slim\Factory\AppFactory;
 use Projetux\Service\TarefaService;
 use Projetux\infra\Debug;
+use Projetux\Math\Basic;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -60,6 +61,15 @@ $app->post('/tarefas', function(Request $request, Response $response, array $arg
     return $response->withStatus(201);
 });
 
+
+$app->get('/mat/soma/{nu1}/{nu2}', function(Request $request, Response $response, array $args){
+    $basic = new Basic();
+    $num1 = $args['nu1'];
+    $num2 = $args['nu2'];
+    $soma = $basic->soma($num1, $num2);
+    
+
+});
 
 
 $app->delete('/tarefas/{id}', function(Request $request, Response $response, array $args) {
