@@ -33,13 +33,13 @@ $errorMiddleware->setErrorHandler(HttpNotFoundException::class, function (
 $app->get('/tarefas', function (Request $request, Response $response, array $args) {
     $tarefa_service = new TarefaService();
     $tarefa = $tarefa_service->getAllTarefas();
-    $response->getBody()->write(json_encode($tarefa));
+    $response->getBody()->write(json_encode($tarefa));  
     return $response->withHeader('Content-Type', 'application/json');
 });
 
 $app->get('/teste-debug', function(Request $request, Response $response, array $args) {
     $debug = new Debug();
-    $response->getBody()->write($debug->debug('teste 00001'));
+    $response->getBody()->write($debug->debug("teste 00001"));
     return $response;
 });
 

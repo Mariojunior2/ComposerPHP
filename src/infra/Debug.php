@@ -4,9 +4,9 @@ namespace Projetux\infra;
 
 
 class Debug {
-    public function debug(string $texto): void
+    public function debug(string $texto): string
     {
-        echo "Debug: {$texto}";
+         return "Debug: {$texto}";
     }
 }
 
