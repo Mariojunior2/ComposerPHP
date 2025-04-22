@@ -38,6 +38,48 @@ $app->get('/tarefas', function (Request $request, Response $response, array $arg
     return $response->withHeader('Content-Type', 'application/json');
 });
 
+$app->get("/math/soma/{numero}/{numero2}", function(Request $request, Response $response, array $args) {  
+    $basic = new Basic();
+    $resultado = $basic->soma($args['numero'], $args['numero2']);
+    $response->getBody()->write((string) $resultado);
+    return $response;
+});
+
+$app->get("/math/menos/{numero}/{numero2}", function(Request $request, Response $response, array $args) {  
+    $basic = new Basic();
+    $resultado = $basic->subtrai($args['numero'], $args['numero2']);
+    $response->getBody()->write((string) $resultado);
+    return $response;
+});
+
+$app->get("/math/muticlicao/{numero}/{numero2}", function(Request $request, Response $response, array $args) {  
+    $basic = new Basic();
+    $resultado = $basic->mutipliq($args['numero'], $args['numero2']);
+    $response->getBody()->write((string) $resultado);
+    return $response;
+});
+
+$app->get("/math/divicao/{numero}/{numero2}", function(Request $request, Response $response, array $args) {  
+    $basic = new Basic();
+    $resultado = $basic->divicao($args['numero'], $args['numero2']);
+    $response->getBody()->write((string) $resultado);
+    return $response;
+});
+
+$app->get("/math/quadrado/{numero}", function(Request $request, Response $response, array $args) {  
+    $basic = new Basic();
+    $resultado = $basic->elevadoaoquadrado($args['numero']);
+    $response->getBody()->write((string) $resultado);
+    return $response;
+});
+
+$app->get("/math/raiz/{numero}", function(Request $request, Response $response, array $args) {  
+    $basic = new Basic();
+    $resultado = $basic->raiz($args['numero']);
+    $response->getBody()->write((string) $resultado);
+    return $response;
+});
+
 $app->get('/teste-debug', function(Request $request, Response $response, array $args) {
     $debug = new Debug();
     $response->getBody()->write($debug->debug("teste 00001"));
