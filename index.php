@@ -52,6 +52,17 @@ $app->get("/math/menos/{numero}/{numero2}", function(Request $request, Response 
     return $response;
 });
 
+$app->post('/{tipo}/{base}/{altura}', function (Request $request, Response $response, array $args) {
+    $CalcularService = new CalcularService();
+    $tipo = $args['tipo'];
+    $base = $args['base'];
+    $altura = $args['altura'];
+    $area = $CalcularService->CalcularArea($tipo, $base, $altura);
+    $response->getBody()->write((string) $area);
+    return $response;
+
+});
+
 $app->get("/math/muticlicao/{numero}/{numero2}", function(Request $request, Response $response, array $args) {  
     $basic = new Basic();
     $resultado = $basic->mutipliq($args['numero'], $args['numero2']);
